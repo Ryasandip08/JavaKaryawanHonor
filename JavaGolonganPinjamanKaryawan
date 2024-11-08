@@ -1,0 +1,71 @@
+import java.util.Scanner;
+
+public class KaryawanHonor {
+    private static final double BUNGA_PERSEN = 0.025; // 2.5% interest rate
+
+    public static void main(String[] args) {
+        KaryawanHonor kh = new KaryawanHonor();
+        kh.karyawanHonor();
+    }
+
+    public void karyawanHonor() {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Input borrower details
+        System.out.print("Masukkan nama peminjam: ");
+        String namaPeminjam = scanner.nextLine();
+        
+        System.out.print("Masukkan NIK peminjam: ");
+        String nikPeminjam = scanner.nextLine();
+        
+        // Input loan category
+        System.out.println("Pilih Golongan Pinjaman:");
+        System.out.println("1. Golongan A (Rp 10.000.000)");
+        System.out.println("2. Golongan B (Rp 15.000.000)");
+        System.out.println("3. Golongan C (Rp 20.000.000)");
+        System.out.print("Masukkan pilihan golongan (1/2/3): ");
+        int pilihanGolongan = scanner.nextInt();
+        
+        // Input loan duration
+        System.out.print("Masukkan lama angsuran pinjam (bulan): ");
+        int lamaAngsuran = scanner.nextInt();
+        
+        // Determine principal based on selected category
+        double pokokPinjaman = 0;
+        switch (pilihanGolongan) {
+            case 1:
+                pokokPinjaman = 10000000;
+                break;
+            case 2:
+                pokokPinjaman = 15000000;
+                break;
+            case 3:
+                pokokPinjaman = 20000000;
+                break;
+            default:
+                System.out.println("Golongan tidak valid.");
+                return;
+        }
+        
+        // Calculate monthly interest
+        double bungaBulanan = pokokPinjaman * BUNGA_PERSEN;
+        
+        // Calculate monthly obligation
+        double kewajibanBulanan = (pokokPinjaman / lamaAngsuran) + bungaBulanan;
+        
+        // Calculate total obligation
+        double totalKewajiban = kewajibanBulanan * lamaAngsuran;
+
+        // Output results
+        System.out.println("\n--- Rincian Pinjaman ---");
+        System.out.println("Nama Peminjam: " + namaPeminjam);
+        System.out.println("NIK Peminjam: " + nikPeminjam);
+        System.out.println("Golongan Pinjaman: " + pilihanGolongan);
+        System.out.println("Pokok Pinjaman: Rp " + pokokPinjaman);
+        System.out.println("Bunga Bulanan: Rp " + bungaBulanan);
+        System.out.println("Kewajiban Bulanan: Rp " + kewajibanBulanan);
+        System.out.println("Total Kewajiban Pinjaman: Rp " + totalKewajiban);
+        
+        scanner.close();
+    }
+}
